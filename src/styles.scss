@@ -1,0 +1,98 @@
+
+:root{
+    --black:#000000;
+    --white:#ffffff;
+    --green:#1EA575;
+    --rose-100:#FCF8F6;
+    --rose-200:#F5EEEC;
+    --rose-300:#CAAFA7;
+    --rose-400:#AD8A85;
+    --rose-500:#87635A;
+    --rose-600:#260F08;
+    --red:#C73B0F;
+}
+body {
+    font-family: "Red Hat Text", sans-serif;
+    font-optical-sizing: auto;
+    background-color: var(--rose-100);
+    margin: 0;
+  }
+h1,h2,h3,h4,h5,h6{
+    margin: 0;
+}
+
+h1{
+    font-size: 40px;
+}
+h2{
+    font-size: 24px;
+}
+
+h4{
+    font-size: 16px;
+}
+.basic-btn{
+    width: 160px;
+    height: 44px;
+    border-radius: 22px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.add-to-cart-btn{
+    border: 1px solid var(--rose-300);
+    background-color: var(--white);
+    gap: 0.5rem;
+    &:hover{
+        color: var(--red);
+        border: 1px solid var(--red);
+    }
+}
+
+.inc-dec-cart-btn{
+    justify-content: space-between;
+    padding: 0 0.8rem;
+    background-color: var(--red);
+    color: var(--white);
+
+    .reduce-cart-item{
+        width: 17.5px;
+        height: 17.5px;
+        border-radius: 50%;
+        place-content: center;
+        display: grid;
+        border: 1.5px solid var(--white);
+        background-color: transparent;
+
+        &:hover{
+            background-color: var(--white);
+            #decreaseIcon{
+                fill:black !important
+            }
+        }
+    }
+    .increase-cart-item{
+        width: 17.5px;
+        place-content: center;
+        display: grid;
+        height: 17.5px;
+        border-radius: 50%;
+        border: 1.5px solid var(--white);
+        background-color: transparent;
+        &:hover{
+            background-color: var(--white);
+            #increaseIcon{
+                fill:black !important
+            }
+        }
+    }
+}
+.show{
+    display: block !important;
+}
+.hide{
+    display: none !important;
+}
+html, body { height: 100%; }

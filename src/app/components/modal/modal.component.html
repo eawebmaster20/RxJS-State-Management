@@ -1,0 +1,38 @@
+<div (click)="confirmOrder($event)" class="mat-dialog-content">
+  <div class="modal-container">
+      <div class="modal">
+          <div class="cart">
+            <img class="confirmed-icon" src="assets/images/icon-order-confirmed.svg" alt="confirm-order icon" srcset="">
+              <h1 class="cart-title">Order Confirmed</h1>
+              <p class="order-confirmation-message">We hope you enjoy you food!</p>
+              <!-- @if((cart | async)?.length){
+                  <div>
+                    <mat-dialog-content>
+                      @for(item of cart | async;track item){
+                          <div class="cart-item">
+                            <div class="cart-item-info">
+                              <h4 class="cart-item-name">{{ item.name }}</h4>
+                              <div class="item-calculation">
+                                <span class="item-quantity">{{ item.quantity }}x</span>
+                                <span class="item-unit-price"> &#64;${{ item.price }}</span>
+                                <span class="total-item-price">${{ item.price * item.quantity }}</span>
+                              </div>
+                            </div>
+                          </div>
+                      }
+                    </mat-dialog-content>
+                    <div class="hr"></div>
+                
+                    <div class="cart-total">
+                      <span class="cart-total-price">Order Total</span>
+                      <h2 class="cart-total-title">${{ totalOrder | async }}</h2>
+                    </div>
+                    <button id="confirmOrder" class="confirm-order-btn">
+                      Start new order
+                    </button>
+                  </div>
+              } -->
+            </div>
+      </div>
+  </div>
+</div>

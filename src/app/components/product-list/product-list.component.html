@@ -1,0 +1,49 @@
+<div class="container">
+    <div class="page-elements">
+        <div>
+            <div class="navbar">
+                <h1 class="page-title">Desserts</h1>
+                <div class="demo-section">
+                    Total in cart
+                    <mat-icon [matBadge]="cart$.getValue().length" matBadgeColor="warn">shopping_cart</mat-icon>
+                    <!-- Include text description of the icon's meaning for screen-readers -->
+                    <span class="cdk-visually-hidden">
+                        An icon for total items in cart
+                    </span>
+                </div>
+            </div>
+        <div class="product-list">
+            @for(product of products | async; track product){
+                <div class="product-item-container">
+                    <div class="info-up">
+                        <picture class="pic">
+                            <source media="(min-width: 768px)" type="image/webp" [srcset]="product.image.tablet">
+                            <source media="(min-width: 1024px)" type="image/jpeg" [srcset]="product.image.desktop">
+                            <img class="product-img" [src]="product.image.mobile" alt="cart-item-image">
+                        </picture>
+                        @if(!(isInCart(product) | async)){
+                            <button (click)="addToCart(product)" class="basic-btn add-to-cart-btn">
+                                <img [src]="variables.imgUrls['cartIcon']" alt="" srcset="">
+                                <span>Add To Cart</span>
+                            </button>
+                        }
+                        @else {
+                            <button (click)="removeFromCart(product.id)" class="basic-btn inc-dec-cart-btn">
+                                <span>remove</span>
+                            </button>
+                        }
+                    </div>
+                    <div class="info-down">
+                        <span class="product-short-name">{{product.category}}</span>
+                        <h4 class="product-long-name">{{product.name}}</h4>
+                        <span class="product-price">{{product.price | currency}}</span>
+                    </div>
+                </div>
+            }@empty {
+                <span>loading...</span>
+            }
+        </div>
+        </div>
+</div>
+
+<app-modal [class]="variables.showModal ? 'show':'hide'"/>
