@@ -24,11 +24,8 @@ export class ModalComponent {
     }
   
     confirmOrder(event: Event) {
-      if((event.target as HTMLElement).getAttribute('id') === 'confirmOrder'){
-        this.variables.showModal = !this.variables.showModal
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        document.body.style.overflow="scroll"
-        // this.store.dispatch(clearCart())
-      }
+      this.variables.showModal = !this.variables.showModal
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      document.body.style.overflow="scroll"
     }
 }
