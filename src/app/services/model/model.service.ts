@@ -1,40 +1,51 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable, of } from 'rxjs';
 import { ICart, IProduct } from '../../interfaces/product-item';
+import { VariablesService } from '../variables.service';
+import { ApiService } from '../apiservice/api.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ModelService {
-  cartSubject = new BehaviorSubject<ICart[]>([]);
-  cart$: Observable<ICart[]> = this.cartSubject.asObservable();
-  constructor() { }
+  cart$ = new BehaviorSubject<ICart[]>([]);
+  products!:Observable<IProduct[]>
+  constructor(
+    public variables: VariablesService,
+    private apiService : ApiService,
+  ) {
+    this.apiService.fetchProducts().subscribe({
+      next:(prod)=>{
+        this.products = of(prod);
+        console.log(this.products);
+      },
+      error:(err)=>console.error(err),
+      complete:()=>console.log('complete')
+    })
 
-  loadHttpResponse(){
-    
+    this.cart$.subscribe({
+      next:(prod)=>console.log(prod),
+      error:(err)=>console.error(err),
+      complete:()=>console.log('complete')
+    })
+
+  }
+  toggleDialog(){
+    this.variables.showModal = !this.variables.showModal
   }
 
- 
-  private get cartItems(): ICart[] {
-    return this.cartSubject.getValue();
+  addToCart(product:IProduct) {
+    let item = {...product, quantity:1}
+    this.cart$.next([...this.cart$.getValue(), item])
   }
-
-  addItem(item: ICart) {
-    const currentCart = this.cartItems;
-    const itemIndex = currentCart.findIndex(i => i.id === item.id);
-    
-    if (itemIndex > -1) {
-      currentCart[itemIndex].quantity += item.quantity;
-    } else {
-      currentCart.push(item);
-    }
-
-    this.cartSubject.next(currentCart);
+  isInCart(product: IProduct) {
+    let item = {...product, quantity:1}
+    return of(this.cart$.getValue().some(item=>item.id === product.id))
   }
-
-  removeItem(itemId: number) {
-    const updatedCart = this.cartItems.filter(item => item.id !== itemId);
-    this.cartSubject.next(updatedCart);
+  removeFromCart(productId:number){
+    let cartItems = this.cart$.getValue()
+    cartItems = cartItems.filter(item=>item.id !== productId)
+    this.cart$.next(cartItems)
   }
 
   getTotalItems(): Observable<number> {
