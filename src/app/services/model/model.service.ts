@@ -32,6 +32,8 @@ export class ModelService {
   }
   toggleDialog(){
     this.variables.showModal = !this.variables.showModal
+     window.scrollTo({ top: 0, behavior: 'smooth' });
+    document.body.style.overflow="hidden"
   }
 
   addToCart(product:IProduct) {
@@ -48,11 +50,7 @@ export class ModelService {
     this.cart$.next(cartItems)
   }
 
-  getTotalItems(): Observable<number> {
-    return this.cart$.pipe(
-      map((items: ICart[]) =>
-        items.reduce((total, item) => total + item.quantity, 0)
-      )
-    );
+  clearCart(){
+    this.cart$.next([])
   }
 }
