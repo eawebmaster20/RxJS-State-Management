@@ -5,10 +5,10 @@
             <img class="confirmed-icon" src="assets/images/icon-order-confirmed.svg" alt="confirm-order icon" srcset="">
               <h1 class="cart-title">Order Confirmed</h1>
               <p class="order-confirmation-message">We hope you enjoy you food!</p>
-              <!-- @if((cart | async)?.length){
+              @if((modelService.cart$ | async)?.length){
                   <div>
                     <mat-dialog-content>
-                      @for(item of cart | async;track item){
+                      @for(item of modelService.cart$| async;track item){
                           <div class="cart-item">
                             <div class="cart-item-info">
                               <h4 class="cart-item-name">{{ item.name }}</h4>
@@ -25,13 +25,13 @@
                 
                     <div class="cart-total">
                       <span class="cart-total-price">Order Total</span>
-                      <h2 class="cart-total-title">${{ totalOrder | async }}</h2>
+                      <!-- <h2 class="cart-total-title">${{ totalOrder | async }}</h2> -->
                     </div>
                     <button id="confirmOrder" class="confirm-order-btn">
                       Start new order
                     </button>
                   </div>
-              } -->
+              }
             </div>
       </div>
   </div>
