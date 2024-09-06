@@ -4,6 +4,10 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        
+        .demo-section{
+            cursor: pointer;
+        }
     }
     .page-elements{
         display: flex;

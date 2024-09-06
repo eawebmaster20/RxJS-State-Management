@@ -3,10 +3,9 @@
         <div>
             <div class="navbar">
                 <h1 class="page-title">Desserts</h1>
-                <div class="demo-section">
+                <div class="demo-section" (click)="modelService.toggleDialog()" >
                     Total in cart
                     <mat-icon 
-                        (click)="modelService.toggleDialog()" 
                         [matBadge]="modelService.cart$.getValue().length" 
                         matBadgeColor="warn">
                         shopping_cart
