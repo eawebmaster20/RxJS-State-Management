@@ -5,15 +5,19 @@
                 <h1 class="page-title">Desserts</h1>
                 <div class="demo-section">
                     Total in cart
-                    <mat-icon [matBadge]="cart$.getValue().length" matBadgeColor="warn">shopping_cart</mat-icon>
-                    <!-- Include text description of the icon's meaning for screen-readers -->
+                    <mat-icon 
+                        (click)="modelService.toggleDialog()" 
+                        [matBadge]="modelService.cart$.getValue().length" 
+                        matBadgeColor="warn">
+                        shopping_cart
+                    </mat-icon>
                     <span class="cdk-visually-hidden">
                         An icon for total items in cart
                     </span>
                 </div>
             </div>
         <div class="product-list">
-            @for(product of products | async; track product){
+            @for(product of modelService.products | async; track product){
                 <div class="product-item-container">
                     <div class="info-up">
                         <picture class="pic">
@@ -21,14 +25,14 @@
                             <source media="(min-width: 1024px)" type="image/jpeg" [srcset]="product.image.desktop">
                             <img class="product-img" [src]="product.image.mobile" alt="cart-item-image">
                         </picture>
-                        @if(!(isInCart(product) | async)){
-                            <button (click)="addToCart(product)" class="basic-btn add-to-cart-btn">
+                        @if(!(modelService.isInCart(product) | async)){
+                            <button (click)="modelService.addToCart(product)" class="basic-btn add-to-cart-btn">
                                 <img [src]="variables.imgUrls['cartIcon']" alt="" srcset="">
                                 <span>Add To Cart</span>
                             </button>
                         }
                         @else {
-                            <button (click)="removeFromCart(product.id)" class="basic-btn inc-dec-cart-btn">
+                            <button (click)="modelService.removeFromCart(product.id)" class="basic-btn inc-dec-cart-btn">
                                 <span>remove</span>
                             </button>
                         }
